@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rabbane Online Quran Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-deep: #0a2463;
+    --blue-mid: #1e4db7;
+    --blue-light: #3a86ff;
+    --blue-pale: #e8f0fe;
+    --gold: #f0a500;
+    --gold-light: #ffd166;
+    --white: #ffffff;
+    --text-dark: #0d1b2a;
+    --text-mid: #3d5a80;
+    --text-light: #8fa7c9;
+    --bg-light: #f4f7fb;
+    --shadow: 0 8px 32px rgba(10,36,99,0.12);
+    --shadow-hover: 0 16px 48px rgba(10,36,99,0.22);
+    --radius: 16px;
+    --radius-sm: 8px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* Arabic / Urdu text */
+  .urdu {
+    font-family: 'Amiri', serif;
+    direction: rtl;
+    text-align: right;
+  }
+
+  /* ===== NAVBAR ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,36,99,0.97);
+    backdrop-filter: blur(12px);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-logo-icon {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+
+  .nav-logo-text { color: white; }
+  .nav-logo-text .main { font-size: 15px; font-weight: 700; letter-spacing: 0.5px; }
+  .nav-logo-text .sub { font-size: 11px; color: var(--gold-light); font-weight: 300; }
+
+  .nav-links {
+    display: flex; gap: 8px; list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 13px; font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+
+  .nav-links a:hover {
+    color: white;
+    background: rgba(255,255,255,0.12);
+  }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light)) !important;
+    color: var(--blue-deep) !important;
+    font-weight: 600 !important;
+    padding: 8px 20px !important;
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column; gap: 5px; cursor: pointer;
+    background: none; border: none;
+  }
+  .hamburger span { width: 25px; height: 2px; background: white; border-radius: 2px; transition: 0.3s; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-mid) 60%, #1a56c7 100%);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 100px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Geometric decorations */
+  .hero-deco {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.08;
+  }
+  .hero-deco-1 {
+    width: 500px; height: 500px;
+    background: var(--gold);
+    top: -150px; right: -150px;
+  }
+  .hero-deco-2 {
+    width: 300px; height: 300px;
+    background: var(--blue-light);
+    bottom: -100px; left: -100px;
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(240,165,0,0.2);
+    border: 1px solid rgba(240,165,0,0.4);
+    color: var(--gold-light);
+    padding: 6px 20px;
+    border-radius: 30px;
+    font-size: 13px; font-weight: 500;
+    margin-bottom: 24px;
+    animation: fadeInDown 0.8s ease both;
+  }
+
+  .hero-arabic {
+    font-family: 'Amiri', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    color: var(--gold-light);
+    margin-bottom: 16px;
+    animation: fadeInDown 0.9s ease both;
+    direction: rtl;
+  }
+
+  .hero h1 {
+    font-size: clamp(30px, 5vw, 52px);
+    font-weight: 700;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 8px;
+    animation: fadeInDown 1s ease both;
+  }
+
+  .hero-urdu {
+    font-family: 'Amiri', serif;
+    font-size: clamp(18px, 3vw, 26px);
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 24px;
+    direction: rtl;
+    animation: fadeInDown 1.1s ease both;
+  }
+
+  .hero p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    max-width: 550px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+    animation: fadeIn 1.3s ease both;
+  }
+
+  .hero-buttons {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    animation: fadeIn 1.4s ease both;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--blue-deep);
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-weight: 700; font-size: 15px;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(240,165,0,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(240,165,0,0.5); }
+
+  .btn-secondary {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-weight: 600; font-size: 15px;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+    margin-top: 56px; padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    animation: fadeIn 1.5s ease both;
+  }
+
+  .stat { text-align: center; color: white; }
+  .stat-num { font-size: 32px; font-weight: 700; color: var(--gold-light); display: block; }
+  .stat-label { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 4px; }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 80px 5%; }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    background: var(--blue-pale);
+    color: var(--blue-mid);
+    padding: 5px 18px;
+    border-radius: 20px;
+    font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 4vw, 38px);
+    font-weight: 700;
+    color: var(--blue-deep);
+    margin-bottom: 8px;
+  }
+
+  .section-urdu {
+    font-family: 'Amiri', serif;
+    font-size: clamp(18px, 3vw, 26px);
+    color: var(--text-mid);
+    direction: rtl;
+    margin-bottom: 14px;
+  }
+
+  .section-desc {
+    font-size: 15px; color: var(--text-mid);
+    max-width: 560px; margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .divider {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--blue-light));
+    border-radius: 3px;
+    margin: 16px auto 0;
+  }
+
+  /* ===== COURSES ===== */
+  #courses { background: var(--bg-light); }
+
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .course-card {
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s;
+    border: 1px solid rgba(10,36,99,0.06);
+  }
+
+  .course-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .course-header {
+    padding: 28px 24px 20px;
+    background: linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
+    text-align: center;
+  }
+
+  .course-icon {
+    font-size: 38px; margin-bottom: 10px; display: block;
+  }
+
+  .course-header h3 {
+    color: white; font-size: 18px; font-weight: 600; margin-bottom: 4px;
+  }
+
+  .course-header .urdu-title {
+    font-family: 'Amiri', serif;
+    color: var(--gold-light);
+    font-size: 16px;
+    direction: rtl;
+  }
+
+  .course-body { padding: 20px 24px 24px; }
+
+  .course-body ul {
+    list-style: none; margin-bottom: 20px;
+  }
+
+  .course-body ul li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 13.5px; color: var(--text-mid);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--bg-light);
+  }
+
+  .course-body ul li:last-child { border-bottom: none; }
+
+  .check-icon {
+    width: 18px; height: 18px; min-width: 18px;
+    background: linear-gradient(135deg, var(--blue-mid), var(--blue-light));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 10px; margin-top: 1px;
+  }
+
+  .course-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid var(--bg-light);
+  }
+
+  .course-age {
+    font-size: 12px; color: var(--text-light);
+    background: var(--bg-light);
+    padding: 4px 12px; border-radius: 20px;
+  }
+
+  .course-enroll {
+    background: var(--blue-mid);
+    color: white; border: none;
+    padding: 8px 18px; border-radius: 20px;
+    font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all 0.3s;
+  }
+
+  .course-enroll:hover { background: var(--blue-deep); }
+
+  /* ===== TEACHERS ===== */
+  .teachers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 28px;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .teacher-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: all 0.3s;
+    border: 1px solid rgba(10,36,99,0.06);
+  }
+
+  .teacher-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+
+  .teacher-avatar {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue-pale), var(--blue-light));
+    margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px;
+    border: 3px solid var(--gold);
+  }
+
+  .teacher-card h3 { font-size: 17px; font-weight: 700; color: var(--blue-deep); margin-bottom: 4px; }
+
+  .teacher-urdu {
+    font-family: 'Amiri', serif;
+    font-size: 15px; color: var(--text-mid);
+    direction: rtl; margin-bottom: 8px;
+  }
+
+  .teacher-role {
+    font-size: 13px; color: var(--blue-mid);
+    background: var(--blue-pale);
+    padding: 4px 14px; border-radius: 20px;
+    display: inline-block; margin-bottom: 14px; font-weight: 500;
+  }
+
+  .teacher-bio {
+    font-size: 13px; color: var(--text-mid); line-height: 1.6; margin-bottom: 16px;
+  }
+
+  .teacher-exp {
+    display: flex; justify-content: center; gap: 20px;
+  }
+
+  .exp-item { text-align: center; }
+  .exp-num { font-size: 22px; font-weight: 700; color: var(--gold); display: block; }
+  .exp-label { font-size: 11px; color: var(--text-light); }
+
+  /* ===== FEES ===== */
+  #fees { background: var(--bg-light); }
+
+  .fees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    max-width: 1000px; margin: 0 auto;
+  }
+
+  .fee-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+  }
+
+  .fee-card:hover { transform: translateY(-5px); border-color: var(--blue-light); }
+
+  .fee-card.featured {
+    background: linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
+    color: white;
+    border-color: var(--gold);
+  }
+
+  .fee-badge {
+    position: absolute; top: 16px; right: -28px;
+    background: var(--gold);
+    color: var(--blue-deep);
+    font-size: 11px; font-weight: 700;
+    padding: 4px 36px;
+    transform: rotate(45deg);
+    transform-origin: center;
+  }
+
+  .fee-plan { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--blue-mid); margin-bottom: 8px; }
+  .fee-card.featured .fee-plan { color: var(--gold-light); }
+
+  .fee-urdu { font-family: 'Amiri', serif; font-size: 15px; color: var(--text-mid); direction: rtl; margin-bottom: 16px; }
+  .fee-card.featured .fee-urdu { color: rgba(255,255,255,0.75); }
+
+  .fee-price { font-size: 42px; font-weight: 800; color: var(--blue-deep); line-height: 1; }
+  .fee-card.featured .fee-price { color: var(--gold-light); }
+
+  .fee-currency { font-size: 20px; vertical-align: top; margin-top: 8px; display: inline-block; font-weight: 400; }
+  .fee-period { font-size: 13px; color: var(--text-light); margin-bottom: 24px; }
+  .fee-card.featured .fee-period { color: rgba(255,255,255,0.6); }
+
+  .fee-features { list-style: none; margin-bottom: 28px; }
+  .fee-features li {
+    padding: 8px 0;
+    font-size: 14px; color: var(--text-mid);
+    border-bottom: 1px solid var(--bg-light);
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .fee-card.featured .fee-features li { color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.1); }
+  .fee-features li:last-child { border-bottom: none; }
+
+  .fee-btn {
+    display: block; width: 100%;
+    padding: 12px;
+    border-radius: 30px;
+    font-weight: 700; font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s; cursor: pointer; border: none;
+  }
+  .fee-btn-default { background: var(--blue-pale); color: var(--blue-mid); }
+  .fee-btn-default:hover { background: var(--blue-mid); color: white; }
+  .fee-btn-featured { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--blue-deep); }
+  .fee-btn-featured:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(240,165,0,0.4); }
+
+  /* ===== ENROLL FORM ===== */
+  .form-container {
+    max-width: 700px; margin: 0 auto;
+    background: white;
+    border-radius: var(--radius);
+    padding: 48px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(10,36,99,0.08);
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  .form-group { margin-bottom: 22px; }
+
+  .form-group label {
+    display: block; font-size: 13px; font-weight: 600; color: var(--blue-deep);
+    margin-bottom: 8px;
+  }
+
+  .form-group label span { font-family: 'Amiri', serif; color: var(--text-mid); font-size: 14px; direction: rtl; display: block; font-weight: 400; }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-sm);
+    font-size: 14px; color: var(--text-dark);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-light);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--blue-mid);
+    box-shadow: 0 0 0 3px rgba(30,77,183,0.1);
+    background: white;
+  }
+
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
+    color: white;
+    border: none; border-radius: 30px;
+    font-size: 16px; font-weight: 700;
+    cursor: pointer; transition: all 0.3s;
+    letter-spacing: 0.5px;
+    margin-top: 8px;
+  }
+
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(10,36,99,0.35); }
+
+  .form-note {
+    text-align: center; font-size: 12px; color: var(--text-light);
+    margin-top: 16px;
+  }
+
+  /* ===== GALLERY ===== */
+  #gallery { background: var(--bg-light); }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .gallery-item {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    box-shadow: var(--shadow);
+  }
+
+  .gallery-item:hover { transform: scale(1.03); }
+
+  .gallery-item .gallery-emoji { font-size: 48px; }
+  .gallery-item .gallery-label { color: rgba(255,255,255,0.8); font-size: 13px; text-align: center; padding: 0 12px; }
+
+  /* ===== CONTACT ===== */
+  .contact-wrapper {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    align-items: start;
+  }
+
+  .contact-info h3 {
+    font-size: 22px; font-weight: 700; color: var(--blue-deep); margin-bottom: 6px;
+  }
+  .contact-info .urdu-sub { font-family: 'Amiri', serif; font-size: 16px; color: var(--text-mid); direction: rtl; margin-bottom: 24px; }
+
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    margin-bottom: 24px;
+    padding: 18px;
+    background: var(--bg-light);
+    border-radius: var(--radius-sm);
+    transition: box-shadow 0.3s;
+  }
+
+  .contact-item:hover { box-shadow: var(--shadow); }
+
+  .contact-icon {
+    width: 44px; height: 44px; min-width: 44px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+
+  .icon-whatsapp { background: #25d36620; color: #25d366; }
+  .icon-phone { background: var(--blue-pale); color: var(--blue-mid); }
+  .icon-email { background: #ff6b6b20; color: #ff6b6b; }
+  .icon-location { background: #f0a50020; color: var(--gold); }
+
+  .contact-detail h4 { font-size: 13px; font-weight: 600; color: var(--text-dark); margin-bottom: 4px; }
+  .contact-detail p { font-size: 14px; color: var(--text-mid); }
+  .contact-detail a { color: var(--blue-mid); text-decoration: none; font-weight: 600; }
+  .contact-detail a:hover { color: var(--blue-deep); }
+
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25d366;
+    color: white;
+    padding: 14px 28px; border-radius: 50px;
+    text-decoration: none; font-weight: 700; font-size: 15px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(37,211,102,0.35);
+    margin-top: 8px;
+  }
+  .whatsapp-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,211,102,0.45); }
+
+  .contact-map {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: linear-gradient(135deg, var(--blue-pale), white);
+    padding: 36px 24px;
+    text-align: center;
+  }
+
+  .contact-map h4 { color: var(--blue-deep); font-size: 18px; margin-bottom: 8px; }
+  .contact-map .map-urdu { font-family: 'Amiri', serif; color: var(--text-mid); direction: rtl; font-size: 16px; margin-bottom: 20px; }
+
+  .online-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #25d36620; color: #25d366;
+    padding: 8px 20px; border-radius: 30px;
+    font-size: 13px; font-weight: 600; margin-bottom: 20px;
+  }
+
+  .online-dot { width: 8px; height: 8px; border-radius: 50%; background: #25d366; animation: pulse 1.5s infinite; }
+
+  .timing-list { list-style: none; text-align: left; }
+  .timing-list li {
+    display: flex; justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(10,36,99,0.06);
+    font-size: 14px; color: var(--text-mid);
+  }
+  .timing-list li:last-child { border-bottom: none; }
+  .timing-list li strong { color: var(--blue-deep); }
+
+  /* ===== DASHBOARD ===== */
+  #dashboard { background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-mid) 100%); }
+  #dashboard .section-title { color: white; }
+  #dashboard .section-tag { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); }
+  #dashboard .section-desc { color: rgba(255,255,255,0.7); }
+
+  .dashboard-preview {
+    max-width: 1000px; margin: 0 auto;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+  }
+
+  .dashboard-bar {
+    background: rgba(0,0,0,0.3);
+    padding: 14px 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green { background: #28c840; }
+
+  .dashboard-bar-title { color: rgba(255,255,255,0.6); font-size: 13px; margin-left: 12px; }
+
+  .dashboard-body { padding: 28px; display: grid; grid-template-columns: 220px 1fr; gap: 24px; }
+
+  .dash-sidebar { display: flex; flex-direction: column; gap: 8px; }
+
+  .dash-nav-item {
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    color: rgba(255,255,255,0.65);
+    font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all 0.3s;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .dash-nav-item:hover, .dash-nav-item.active {
+    background: rgba(255,255,255,0.12); color: white;
+  }
+  .dash-nav-item.active { background: rgba(240,165,0,0.2); color: var(--gold-light); }
+
+  .dash-main { display: flex; flex-direction: column; gap: 20px; }
+
+  .dash-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+  .dash-card {
+    background: rgba(255,255,255,0.08);
+    border-radius: var(--radius-sm);
+    padding: 18px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .dash-card-label { font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .dash-card-value { font-size: 26px; font-weight: 700; color: white; }
+  .dash-card-sub { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+  .dash-progress-section { background: rgba(255,255,255,0.06); border-radius: var(--radius-sm); padding: 20px; }
+  .dash-progress-title { color: white; font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+
+  .progress-item { margin-bottom: 16px; }
+  .progress-item-header { display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
+  .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+
+  .dash-login-overlay {
+    text-align: center; padding: 30px 0 10px;
+  }
+
+  .dash-login-overlay p { color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 16px; }
+
+  .dash-login-btn {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--blue-deep);
+    padding: 12px 32px;
+    border-radius: 30px;
+    border: none;
+    font-weight: 700; font-size: 14px;
+    cursor: pointer; transition: all 0.3s;
+  }
+  .dash-login-btn:hover { transform: translateY(-2px); }
+
+  /* ===== WHY US ===== */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .why-card {
+    text-align: center; padding: 36px 24px;
+    border-radius: var(--radius);
+    transition: all 0.3s;
+    background: white;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(10,36,99,0.05);
+  }
+
+  .why-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--blue-light); }
+
+  .why-icon {
+    font-size: 44px; margin-bottom: 16px; display: block;
+  }
+
+  .why-card h4 { font-size: 16px; font-weight: 700; color: var(--blue-deep); margin-bottom: 6px; }
+  .why-card .w-urdu { font-family: 'Amiri', serif; font-size: 14px; color: var(--text-mid); direction: rtl; margin-bottom: 10px; }
+  .why-card p { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--blue-deep);
+    color: rgba(255,255,255,0.75);
+    padding: 60px 5% 30px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand .logo-text { color: white; font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .footer-brand .logo-urdu { font-family: 'Amiri', serif; color: var(--gold-light); font-size: 18px; direction: rtl; margin-bottom: 14px; }
+  .footer-brand p { font-size: 13px; line-height: 1.7; }
+
+  .footer-col h5 { color: white; font-size: 15px; font-weight: 600; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul li a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 13px; transition: color 0.3s; }
+  .footer-col ul li a:hover { color: var(--gold-light); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+
+  .footer-bottom p { font-size: 12px; }
+  .footer-bottom .heart { color: #ff6b6b; }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: all 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== MOBILE NAV ===== */
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 70px; left: 0; right: 0;
+    background: var(--blue-deep);
+    padding: 20px 5%;
+    z-index: 999;
+    flex-direction: column; gap: 4px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
+
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: rgba(255,255,255,0.85); text-decoration: none;
+    padding: 12px 16px; border-radius: 8px; font-size: 15px;
+    transition: background 0.2s;
+  }
+  .mobile-menu a:hover { background: rgba(255,255,255,0.1); color: white; }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed; bottom: 30px; right: 30px;
+    background: var(--blue-deep);
+    color: white; padding: 16px 24px;
+    border-radius: 12px;
+    font-size: 14px; font-weight: 500;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    transform: translateY(100px); opacity: 0;
+    transition: all 0.4s;
+    z-index: 9999;
+    max-width: 320px;
+    border-left: 4px solid var(--gold);
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .dashboard-body { grid-template-columns: 1fr; }
+    .dash-sidebar { flex-direction: row; flex-wrap: wrap; }
+    .dash-cards { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-wrapper { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+    nav { padding: 0 4%; }
+    section { padding: 60px 4%; }
+  }
+
+  @media (max-width: 480px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .fees-grid { grid-template-columns: 1fr; }
+    .form-container { padding: 28px 20px; }
+    .dash-cards { grid-template-columns: 1fr; }
+    .hero-buttons { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">📖</div>
+    <div class="nav-logo-text">
+      <div class="main">Rabbane Online Quran Academy</div>
+      <div class="sub">ربانی آن لائن قرآن اکیڈمی</div>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#teachers">Teachers</a></li>
+    <li><a href="#fees">Fees</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#enroll" class="nav-cta">Enroll Free</a></li>
+  </ul>
+
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#courses" onclick="toggleMenu()">📚 Courses</a>
+  <a href="#teachers" onclick="toggleMenu()">👨‍🏫 Teachers</a>
+  <a href="#fees" onclick="toggleMenu()">💰 Fees</a>
+  <a href="#gallery" onclick="toggleMenu()">🖼️ Gallery</a>
+  <a href="#contact" onclick="toggleMenu()">📞 Contact</a>
+  <a href="#enroll" onclick="toggleMenu()">✅ Enroll Free</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-deco hero-deco-1"></div>
+  <div class="hero-deco hero-deco-2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🌙 Online Quran Education for All Ages</div>
+    <div class="hero-arabic">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+    <h1>Rabbane Online Quran Academy</h1>
+    <div class="hero-urdu">ربانی آن لائن قرآن اکیڈمی</div>
+    <p>Learn Quran with qualified teachers from the comfort of your home. Live one-on-one classes for kids and adults. اپنے گھر سے قرآن کریم سیکھیں۔</p>
+    <div class="hero-buttons">
+      <a href="#enroll" class="btn-primary">🎓 Free Trial Class / مفت ٹرائل</a>
+      <a href="#courses" class="btn-secondary">📖 View Courses</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Students / طلبہ</span></div>
+      <div class="stat"><span class="stat-num">20+</span><span class="stat-label">Qualified Teachers</span></div>
+      <div class="stat"><span class="stat-num">15+</span><span class="stat-label">Countries / ممالک</span></div>
+      <div class="stat"><span class="stat-num">5★</span><span class="stat-label">Rating / درجہ بندی</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-header reveal">
+    <div class="section-tag">Why Choose Us</div>
+    <h2 class="section-title">ہمیں کیوں منتخب کریں؟</h2>
+    <div class="section-urdu">آپ کا قرآن، ہماری ذمہ داری</div>
+    <div class="divider"></div>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <span class="why-icon">🖥️</span>
+      <h4>Live 1-on-1 Classes</h4>
+      <div class="w-urdu">براہ راست ون آن ون کلاسز</div>
+      <p>Personal attention with dedicated teacher for each student via Zoom or Skype.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">👩‍🎓</span>
+      <h4>Female Teachers Available</h4>
+      <div class="w-urdu">خواتین اساتذہ دستیاب</div>
+      <p>Separate female teachers available for sisters and young girls.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">⏰</span>
+      <h4>Flexible Timings</h4>
+      <div class="w-urdu">آپ کی سہولت کے مطابق وقت</div>
+      <p>Classes available 24/7 to fit your schedule anywhere in the world.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">🎁</span>
+      <h4>Free Trial Class</h4>
+      <div class="w-urdu">مفت ٹرائل کلاس</div>
+      <p>Try your first class completely free. No commitment required.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">📜</span>
+      <h4>Certificate Awarded</h4>
+      <div class="w-urdu">سند / سرٹیفکیٹ</div>
+      <p>Official certificate awarded upon successful course completion.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="section-header reveal">
+    <div class="section-tag">Our Courses</div>
+    <h2 class="section-title">ہمارے کورسز</h2>
+    <div class="section-urdu">قرآن کریم سیکھنے کا بہترین موقع</div>
+    <p class="section-desc">Comprehensive Quran education programs designed for all age groups and skill levels.</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="courses-grid">
+    <div class="course-card reveal">
+      <div class="course-header">
+        <span class="course-icon">🔤</span>
+        <h3>Noorani Qaida</h3>
+        <div class="urdu-title">نورانی قاعدہ</div>
+      </div>
+      <div class="course-body">
+        <ul>
+          <li><span class="check-icon">✓</span>Arabic Alphabets & pronunciation</li>
+          <li><span class="check-icon">✓</span>Basic Harakat (Fatha, Kasra, Damma)</li>
+          <li><span class="check-icon">✓</span>Tanween & Sukoon rules</li>
+          <li><span class="check-icon">✓</span>Maddah & Mushaddad letters</li>
+          <li><span class="check-icon">✓</span>For complete beginners</li>
+        </ul>
+        <div class="course-footer">
+          <span class="course-age">Ages 4+</span>
+          <button class="course-enroll" onclick="scrollToEnroll()">Enroll Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-header">
+        <span class="course-icon">📖</span>
+        <h3>Quran Nazra</h3>
+        <div class="urdu-title">قرآن ناظرہ</div>
+      </div>
+      <div class="course-body">
+        <ul>
+          <li><span class="check-icon">✓</span>Correct Quran recitation</li>
+          <li><span class="check-icon">✓</span>Basic Tajweed rules</li>
+          <li><span class="check-icon">✓</span>Full Quran from start to finish</li>
+          <li><span class="check-icon">✓</span>Makhraj & Sifaat of letters</li>
+          <li><span class="check-icon">✓</span>Suitable for all levels</li>
+        </ul>
+        <div class="course-footer">
+          <span class="course-age">Ages 6+</span>
+          <button class="course-enroll" onclick="scrollToEnroll()">Enroll Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-header" style="background: linear-gradient(135deg, #0a3d62, #1e6fa8);">
+        <span class="course-icon">🎵</span>
+        <h3>Tajweed Course</h3>
+        <div class="urdu-title">تجوید القرآن</div>
+      </div>
+      <div class="course-body">
+        <ul>
+          <li><span class="check-icon">✓</span>Advanced Tajweed rules</li>
+          <li><span class="check-icon">✓</span>Waqf & Ibtida rules</li>
+          <li><span class="check-icon">✓</span>Ghunna & Idgham</li>
+          <li><span class="check-icon">✓</span>Qalqala & Madd types</li>
+          <li><span class="check-icon">✓</span>Certificate on completion</li>
+        </ul>
+        <div class="course-footer">
+          <span class="course-age">Ages 10+</span>
+          <button class="course-enroll" onclick="scrollToEnroll()">Enroll Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-header" style="background: linear-gradient(135deg, #1a472a, #2d6a4f);">
+        <span class="course-icon">🧠</span>
+        <h3>Hifz ul Quran</h3>
+        <div class="urdu-title">حفظ القرآن</div>
+      </div>
+      <div class="course-body">
+        <ul>
+          <li><span class="check-icon">✓</span>Memorization with proper Tajweed</li>
+          <li><span class="check-icon">✓</span>Daily Sabaq & Sabqi system</li>
+          <li><span class="check-icon">✓</span>Short Surahs to full Quran</li>
+          <li><span class="check-icon">✓</span>Regular revision sessions</li>
+          <li><span class="check-icon">✓</span>Hafiz certificate awarded</li>
+        </ul>
+        <div class="course-footer">
+          <span class="course-age">Ages 6+</span>
+          <button class="course-enroll" onclick="scrollToEnroll()">Enroll Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-header" style="background: linear-gradient(135deg, #4a1942, #8e2de2);">
+        <span class="course-icon">📚</span>
+        <h3>Islamic Studies</h3>
+        <div class="urdu-title">اسلامیات</div>
+      </div>
+      <div class="course-body">
+        <ul>
+          <li><span class="check-icon">✓</span>Pillars of Islam & Iman</li>
+          <li><span class="check-icon">✓</span>Seerah of Prophet ﷺ</li>
+          <li><span class="check-icon">✓</span>Namaz, Roza & Islamic Fiqh</li>
+          <li><span class="check-icon">✓</span>Daily Duas & Masnoon Azkaar</li>
+          <li><span class="check-icon">✓</span>Islamic Akhlaq & values</li>
+        </ul>
+        <div class="course-footer">
+          <span class="course-age">Ages 5+</span>
+          <button class="course-enroll" onclick="scrollToEnroll()">Enroll Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-header" style="background: linear-gradient(135deg, #7d4e00, #c07a00);">
+        <span class="course-icon">🌸</span>
+        <h3>Arabic Language</h3>
+        <div class="urdu-title">عربی زبان</div>
+      </div>
+      <div class="course-body">
+        <ul>
+          <li><span class="check-icon">✓</span>Basic Arabic grammar (Nahw & Sarf)</li>
+          <li><span class="check-icon">✓</span>Quranic Arabic vocabulary</li>
+          <li><span class="check-icon">✓</span>Understanding Quranic meaning</li>
+          <li><span class="check-icon">✓</span>Reading & writing Arabic</li>
+          <li><span class="check-icon">✓</span>Beginner to advanced levels</li>
+        </ul>
+        <div class="course-footer">
+          <span class="course-age">Ages 8+</span>
+          <button class="course-enroll" onclick="scrollToEnroll()">Enroll Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHERS -->
+<section id="teachers" style="background: var(--bg-light);">
+  <div class="section-header reveal">
+    <div class="section-tag">Our Teachers</div>
+    <h2 class="section-title">ہمارے اساتذہ</h2>
+    <div class="section-urdu">علم کے چراغ — روشن کریں آپ کا راستہ</div>
+    <p class="section-desc">All teachers are certified, experienced and dedicated to Quran education.</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="teachers-grid">
+    <div class="teacher-card reveal">
+      <div class="teacher-avatar">👨‍🏫</div>
+      <h3>Qari Muhammad Yusuf</h3>
+      <div class="teacher-urdu">قاری محمد یوسف</div>
+      <div class="teacher-role">Tajweed & Hifz Specialist</div>
+      <p class="teacher-bio">Hafiz & Qari with Sanad from Madinah. Expert in Tajweed, Hifz, and Quran recitation.</p>
+      <div class="teacher-exp">
+        <div class="exp-item"><span class="exp-num">12+</span><span class="exp-label">Years Exp.</span></div>
+        <div class="exp-item"><span class="exp-num">300+</span><span class="exp-label">Students</span></div>
+      </div>
+    </div>
+
+    <div class="teacher-card reveal">
+      <div class="teacher-avatar">👩‍🏫</div>
+      <h3>Ustaza Fatima Bibi</h3>
+      <div class="teacher-urdu">استاذہ فاطمہ بی بی</div>
+      <div class="teacher-role">Female Quran Teacher</div>
+      <p class="teacher-bio">Hafiza with specialization in teaching young girls and ladies. Gentle, patient approach.</p>
+      <div class="teacher-exp">
+        <div class="exp-item"><span class="exp-num">8+</span><span class="exp-label">Years Exp.</span></div>
+        <div class="exp-item"><span class="exp-num">200+</span><span class="exp-label">Students</span></div>
+      </div>
+    </div>
+
+    <div class="teacher-card reveal">
+      <div class="teacher-avatar">👨‍🎓</div>
+      <h3>Maulana Abdul Rehman</h3>
+      <div class="teacher-urdu">مولانا عبدالرحمن</div>
+      <div class="teacher-role">Islamic Studies & Arabic</div>
+      <p class="teacher-bio">Aalim from Jamia Islamia, expert in Arabic grammar, Fiqh and Islamic Studies.</p>
+      <div class="teacher-exp">
+        <div class="exp-item"><span class="exp-num">15+</span><span class="exp-label">Years Exp.</span></div>
+        <div class="exp-item"><span class="exp-num">450+</span><span class="exp-label">Students</span></div>
+      </div>
+    </div>
+
+    <div class="teacher-card reveal">
+      <div class="teacher-avatar">👩‍💼</div>
+      <h3>Hafiza Aisha Siddiqui</h3>
+      <div class="teacher-urdu">حافظہ عائشہ صدیقی</div>
+      <div class="teacher-role">Hifz & Noorani Qaida</div>
+      <p class="teacher-bio">Certified Hafiza with specialization in children's Quran education and memorization programs.</p>
+      <div class="teacher-exp">
+        <div class="exp-item"><span class="exp-num">6+</span><span class="exp-label">Years Exp.</span></div>
+        <div class="exp-item"><span class="exp-num">180+</span><span class="exp-label">Students</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEES -->
+<section id="fees">
+  <div class="section-header reveal">
+    <div class="section-tag">Fees & Plans</div>
+    <h2 class="section-title">فیس اور پلانز</h2>
+    <div class="section-urdu">سستے داموں میں بہترین تعلیم</div>
+    <p class="section-desc">Affordable plans for individuals and families. First class is always free.</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="fees-grid">
+    <div class="fee-card reveal">
+      <div class="fee-plan">Basic Plan</div>
+      <div class="fee-urdu">بنیادی پلان</div>
+      <div class="fee-price"><span class="fee-currency">$</span>15</div>
+      <div class="fee-period">per month / ماہانہ</div>
+      <ul class="fee-features">
+        <li>✅ 3 classes per week</li>
+        <li>✅ 1 Course</li>
+        <li>✅ 30 min per class</li>
+        <li>✅ Recorded backup</li>
+        <li>✅ WhatsApp support</li>
+        <li>⛔ Certificate</li>
+      </ul>
+      <button class="fee-btn fee-btn-default" onclick="scrollToEnroll()">Get Started</button>
+    </div>
+
+    <div class="fee-card featured reveal">
+      <div class="fee-badge">Popular</div>
+      <div class="fee-plan">Standard Plan</div>
+      <div class="fee-urdu">اسٹینڈرڈ پلان</div>
+      <div class="fee-price"><span class="fee-currency">$</span>25</div>
+      <div class="fee-period">per month / ماہانہ</div>
+      <ul class="fee-features">
+        <li>✅ 5 classes per week</li>
+        <li>✅ 2 Courses</li>
+        <li>✅ 45 min per class</li>
+        <li>✅ Recorded backup</li>
+        <li>✅ 24/7 WhatsApp support</li>
+        <li>✅ Progress reports</li>
+        <li>✅ Certificate</li>
+      </ul>
+      <button class="fee-btn fee-btn-featured" onclick="scrollToEnroll()">Enroll Now</button>
+    </div>
+
+    <div class="fee-card reveal">
+      <div class="fee-plan">Family Plan</div>
+      <div class="fee-urdu">فیملی پلان</div>
+      <div class="fee-price"><span class="fee-currency">$</span>40</div>
+      <div class="fee-period">per month / ماہانہ — up to 3 students</div>
+      <ul class="fee-features">
+        <li>✅ Daily classes</li>
+        <li>✅ All Courses</li>
+        <li>✅ 60 min per class</li>
+        <li>✅ 3 family members</li>
+        <li>✅ Priority support</li>
+        <li>✅ Certificate for all</li>
+      </ul>
+      <button class="fee-btn fee-btn-default" onclick="scrollToEnroll()">Get Started</button>
+    </div>
+  </div>
+
+  <p style="text-align:center; margin-top:28px; color: var(--text-mid); font-size: 14px;">
+    💰 Pakistani / Indian students: special rates available in PKR / INR &nbsp;|&nbsp; 
+    <strong style="color: var(--blue-mid);">First class FREE for everyone!</strong>
+  </p>
+</section>
+
+<!-- ENROLL FORM -->
+<section id="enroll" style="background: var(--bg-light);">
+  <div class="section-header reveal">
+    <div class="section-tag">Enroll Now</div>
+    <h2 class="section-title">داخلہ فارم</h2>
+    <div class="section-urdu">آج ہی داخلہ لیں — پہلی کلاس مفت</div>
+    <p class="section-desc">Fill out the form and we will contact you within 24 hours to schedule your free trial class.</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="form-container reveal">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Student Name <span>طالب علم کا نام</span></label>
+        <input type="text" placeholder="Enter full name" id="studentName">
+      </div>
+      <div class="form-group">
+        <label>Age / عمر</label>
+        <input type="number" placeholder="e.g. 8" id="studentAge" min="3" max="80">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Parent / Guardian Name <span>والدین / سرپرست کا نام</span></label>
+        <input type="text" placeholder="Enter name" id="parentName">
+      </div>
+      <div class="form-group">
+        <label>WhatsApp Number <span>واٹس ایپ نمبر</span></label>
+        <input type="tel" placeholder="+92 300 0000000" id="whatsappNum">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Email Address <span>ای میل</span></label>
+        <input type="email" placeholder="your@email.com" id="emailAddr">
+      </div>
+      <div class="form-group">
+        <label>Country <span>ملک</span></label>
+        <select id="country">
+          <option value="">Select country</option>
+          <option>Pakistan 🇵🇰</option>
+          <option>United Kingdom 🇬🇧</option>
+          <option>United States 🇺🇸</option>
+          <option>Canada 🇨🇦</option>
+          <option>Australia 🇦🇺</option>
+          <option>Saudi Arabia 🇸🇦</option>
+          <option>UAE 🇦🇪</option>
+          <option>India 🇮🇳</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Course Interested In <span>کون سا کورس؟</span></label>
+        <select id="courseSelect">
+          <option value="">Select course</option>
+          <option>Noorani Qaida — نورانی قاعدہ</option>
+          <option>Quran Nazra — قرآن ناظرہ</option>
+          <option>Tajweed Course — تجوید</option>
+          <option>Hifz ul Quran — حفظ القرآن</option>
+          <option>Islamic Studies — اسلامیات</option>
+          <option>Arabic Language — عربی زبان</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Preferred Teacher Gender <span>استاد / استاذہ</span></label>
+        <select id="teacherGender">
+          <option>Male Teacher (Ustaz)</option>
+          <option>Female Teacher (Ustaza)</option>
+          <option>No preference</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Preferred Class Timing <span>کلاس کا وقت</span></label>
+      <select id="classTime">
+        <option>Morning (6am–12pm)</option>
+        <option>Afternoon (12pm–5pm)</option>
+        <option>Evening (5pm–9pm)</option>
+        <option>Night (9pm–12am)</option>
+        <option>Flexible / Any time</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Message / Additional Info <span>پیغام / اضافی معلومات</span></label>
+      <textarea placeholder="Any special requirements, questions, or previous Quran education..." id="message"></textarea>
+    </div>
+
+    <button class="submit-btn" onclick="submitForm()">
+      🎓 Submit Enrollment — داخلہ جمع کروائیں
+    </button>
+    <p class="form-note">✅ We'll contact you within 24 hours via WhatsApp | ہم 24 گھنٹوں میں واٹس ایپ پر رابطہ کریں گے</p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-header reveal">
+    <div class="section-tag">Gallery</div>
+    <h2 class="section-title">گیلری</h2>
+    <div class="section-urdu">ہماری کلاسز اور طلبہ کی جھلکیاں</div>
+    <div class="divider"></div>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item reveal">
+      <span class="gallery-emoji">📖</span>
+      <span class="gallery-label">Quran Recitation Class</span>
+    </div>
+    <div class="gallery-item reveal" style="background: linear-gradient(135deg, #1a472a, #2d6a4f);">
+      <span class="gallery-emoji">🎓</span>
+      <span class="gallery-label">Certificate Ceremony</span>
+    </div>
+    <div class="gallery-item reveal" style="background: linear-gradient(135deg, #4a1942, #8e2de2);">
+      <span class="gallery-emoji">👧</span>
+      <span class="gallery-label">Kids Hifz Class</span>
+    </div>
+    <div class="gallery-item reveal" style="background: linear-gradient(135deg, #7d4e00, #c07a00);">
+      <span class="gallery-emoji">🌙</span>
+      <span class="gallery-label">Night Quran Session</span>
+    </div>
+    <div class="gallery-item reveal" style="background: linear-gradient(135deg, #0d3b6e, #1565c0);">
+      <span class="gallery-emoji">👨‍🏫</span>
+      <span class="gallery-label">Teacher Training</span>
+    </div>
+    <div class="gallery-item reveal" style="background: linear-gradient(135deg, #1b4332, #40916c);">
+      <span class="gallery-emoji">🏆</span>
+      <span class="gallery-label">Student Achievements</span>
+    </div>
+  </div>
+
+  <p style="text-align:center; margin-top: 28px; color: var(--text-mid); font-size: 14px;">
+    📸 Visit our <a href="https://facebook.com" target="_blank" style="color: var(--blue-mid); font-weight: 600;">Facebook Page</a> for more photos & videos
+  </p>
+</section>
+
+<!-- STUDENT DASHBOARD -->
+<section id="dashboard">
+  <div class="section-header reveal">
+    <div class="section-tag">Student Portal</div>
+    <h2 class="section-title">Student Dashboard</h2>
+    <div class="section-urdu">طالب علم پورٹل — اپنی ترقی دیکھیں</div>
+    <p class="section-desc">Track your progress, view attendance, lessons completed and upcoming classes.</p>
+    <div class="divider" style="background: linear-gradient(90deg, var(--gold), white);"></div>
+  </div>
+
+  <div class="dashboard-preview reveal">
+    <div class="dashboard-bar">
+      <div class="dot dot-red"></div>
+      <div class="dot dot-yellow"></div>
+      <div class="dot dot-green"></div>
+      <span class="dashboard-bar-title">Rabbane Academy — Student Dashboard</span>
+    </div>
+
+    <div class="dashboard-body">
+      <div class="dash-sidebar">
+        <div class="dash-nav-item active">📊 Dashboard</div>
+        <div class="dash-nav-item">📖 My Lessons</div>
+        <div class="dash-nav-item">📅 Schedule</div>
+        <div class="dash-nav-item">📈 Progress</div>
+        <div class="dash-nav-item">📝 Assignments</div>
+        <div class="dash-nav-item">🧾 Payments</div>
+        <div class="dash-nav-item">💬 Messages</div>
+        <div class="dash-nav-item">⚙️ Settings</div>
+      </div>
+
+      <div class="dash-main">
+        <div class="dash-cards">
+          <div class="dash-card">
+            <div class="dash-card-label">Classes Attended</div>
+            <div class="dash-card-value">48</div>
+            <div class="dash-card-sub">This month: 12</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-label">Lessons Completed</div>
+            <div class="dash-card-value">35</div>
+            <div class="dash-card-sub">3 pending</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-label">Next Class</div>
+            <div class="dash-card-value" style="font-size: 16px; margin-top: 4px;">Today 6PM</div>
+            <div class="dash-card-sub">Tajweed - Lesson 12</div>
+          </div>
+        </div>
+
+        <div class="dash-progress-section">
+          <div class="dash-progress-title">📈 Course Progress / کورس کی ترقی</div>
+          <div class="progress-item">
+            <div class="progress-item-header"><span>Tajweed Course</span><span>68%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 68%"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-item-header"><span>Quran Nazra</span><span>85%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 85%"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-item-header"><span>Islamic Studies</span><span>40%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 40%; background: linear-gradient(90deg, var(--blue-light), #7ec8e3);"></div></div>
+          </div>
+        </div>
+
+        <div class="dash-login-overlay">
+          <p>🔐 Login with your enrolled credentials to access full dashboard</p>
+          <button class="dash-login-btn" onclick="showToast('📧 Login link sent to your registered email!')">Login to Dashboard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal">
+    <div class="section-tag">Contact Us</div>
+    <h2 class="section-title">رابطہ کریں</h2>
+    <div class="section-urdu">ہم سے بات کریں — ہم حاضر ہیں</div>
+    <div class="divider"></div>
+  </div>
+
+  <div class="contact-wrapper">
+    <div class="contact-info reveal">
+      <h3>Get In Touch</h3>
+      <div class="urdu-sub">ہم سے رابطہ کریں</div>
+
+      <div class="contact-item">
+        <div class="contact-icon icon-whatsapp">💬</div>
+        <div class="contact-detail">
+          <h4>WhatsApp (Primary)</h4>
+          <p><a href="https://wa.me/923001234567" target="_blank">+92 300 1234567</a></p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon icon-phone">📞</div>
+        <div class="contact-detail">
+          <h4>Phone / فون</h4>
+          <p><a href="tel:+923001234567">+92 300 1234567</a></p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon icon-email">📧</div>
+        <div class="contact-detail">
+          <h4>Email / ای میل</h4>
+          <p><a href="mailto:info@rabbaneacademy.com">info@rabbaneacademy.com</a></p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon icon-location">📍</div>
+        <div class="contact-detail">
+          <h4>Location / مقام</h4>
+          <p>Online — Worldwide / آن لائن — دنیا بھر</p>
+        </div>
+      </div>
+
+      <a href="https://wa.me/923001234567?text=Assalamu%20Alaikum!%20I%20want%20to%20enroll%20in%20Rabbane%20Online%20Quran%20Academy." class="whatsapp-btn" target="_blank">
+        💬 Chat on WhatsApp Now
+      </a>
+    </div>
+
+    <div class="contact-map reveal">
+      <h4>Online Academy — Worldwide</h4>
+      <div class="map-urdu">آن لائن اکیڈمی — دنیا بھر کے طلبہ</div>
+
+      <div class="online-badge">
+        <span class="online-dot"></span>
+        Currently Online & Accepting Students
+      </div>
+
+      <ul class="timing-list">
+        <li><strong>Saturday–Thursday</strong> <span>6 AM – 11 PM (PKT)</span></li>
+        <li><strong>Friday</strong> <span>After Jummah – 11 PM</span></li>
+        <li><strong>Classes via</strong> <span>Zoom / Skype / Google Meet</span></li>
+        <li><strong>Trial Class</strong> <span>FREE — مفت ٹرائل کلاس</span></li>
+        <li><strong>Response Time</strong> <span>Within 24 hours</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-text">📖 Rabbane Online Quran Academy</div>
+      <div class="logo-urdu">ربانی آن لائن قرآن اکیڈمی</div>
+      <p>Dedicated to spreading the knowledge of Holy Quran worldwide. Learn at your own pace from the comfort of your home with qualified teachers.</p>
+    </div>
+
+    <div class="footer-col">
+      <h5>Courses</h5>
+      <ul>
+        <li><a href="#courses">Noorani Qaida</a></li>
+        <li><a href="#courses">Quran Nazra</a></li>
+        <li><a href="#courses">Tajweed Course</a></li>
+        <li><a href="#courses">Hifz ul Quran</a></li>
+        <li><a href="#courses">Islamic Studies</a></li>
+        <li><a href="#courses">Arabic Language</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#teachers">Our Teachers</a></li>
+        <li><a href="#fees">Fees & Plans</a></li>
+        <li><a href="#enroll">Enroll Now</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#dashboard">Student Portal</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="https://wa.me/923001234567">WhatsApp Us</a></li>
+        <li><a href="mailto:info@rabbaneacademy.com">Email Us</a></li>
+        <li><a href="#">Facebook Page</a></li>
+        <li><a href="#">YouTube Channel</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Rabbane Online Quran Academy. All Rights Reserved.</p>
+    <p>Made with <span class="heart">❤️</span> for the Ummah</p>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Close menu on outside click
+  document.addEventListener('click', (e) => {
+    const menu = document.getElementById('mobileMenu');
+    if (!e.target.closest('nav') && !e.target.closest('#mobileMenu')) {
+      menu.classList.remove('open');
+    }
+  });
+
+  // Scroll to enroll
+  function scrollToEnroll() {
+    document.getElementById('enroll').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Toast notification
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+
+  // Form submit
+  function submitForm() {
+    const name = document.getElementById('studentName').value.trim();
+    const whatsapp = document.getElementById('whatsappNum').value.trim();
+    const course = document.getElementById('courseSelect').value;
+
+    if (!name) { showToast('⚠️ Please enter student name'); return; }
+    if (!whatsapp) { showToast('⚠️ Please enter WhatsApp number'); return; }
+    if (!course) { showToast('⚠️ Please select a course'); return; }
+
+    const msg = encodeURIComponent(
+      `Assalamu Alaikum! 🌙\n\n*New Enrollment — Rabbane Academy*\n\n👤 Student: ${name}\n📱 WhatsApp: ${whatsapp}\n📚 Course: ${course}\n\nPlease contact me for free trial class.`
+    );
+    window.open(`https://wa.me/923001234567?text=${msg}`, '_blank');
+    showToast('✅ JazakAllah! Redirecting to WhatsApp...');
+  }
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) {
+      nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.4)';
+    } else {
+      nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.3)';
+    }
+  });
+</script>
+</body>
+</html>
